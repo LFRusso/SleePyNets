@@ -50,9 +50,6 @@ def test(model, test_loader, device_name="cpu"):
 def mean_activity(loader):
     mean = torch.zeros([1,28,28]) # Same dimensions as the inputs
     for images, _ in loader:
-        batch_samples = images.size(0) # batch size (the last batch can have smaller size!)
-        #images = images.view(batch_samples, images.size(1), -1)
-        #mean += images.mean(2).sum(0)
         mean += torch.sum(images, axis=0)
     mean /= len(loader.dataset)
     return mean
